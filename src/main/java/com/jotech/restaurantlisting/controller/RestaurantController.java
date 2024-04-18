@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.jotech.restaurantlisting.service.RestaurantService;
 
 @RestController
 @RequestMapping("/restaurant")
+@CrossOrigin
 public class RestaurantController {
 	
 	@Autowired
@@ -49,10 +51,10 @@ public class RestaurantController {
 	@GetMapping("fetchById/{id}")
 	public ResponseEntity<RestaurantDto> findRestaurantById(@PathVariable Integer id){
 		
-		ResponseEntity<RestaurantDto> restaurant = restaurantService.fetchRestaurantById(id);
+		return restaurantService.fetchRestaurantById(id);
 		
 		
-		return restaurant;
+		
 	   
 		
 	}

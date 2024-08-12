@@ -11,9 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.jotech.restaurantlisting.dto.RestaurantDto;
 import com.jotech.restaurantlisting.entity.Restaurant;
+import com.jotech.restaurantlisting.mapper.RestaurantMapper;
 import com.jotech.restaurantlisting.repo.RestaurantRepo;
-
-import mapper.RestaurantMapper;
 
 @Service
 public class RestaurantService {
@@ -23,20 +22,23 @@ public class RestaurantService {
 
 	public List<RestaurantDto> findAllRestaurants() {
 		
-		
-		List<Restaurant> restaurants = restaurantRpo.findAll();
-		
-		// map it to the list of Dtos 
-		
-		List<RestaurantDto> restaurantDtoList = restaurants.stream().map(restaurant -> RestaurantMapper.INSTANCE
-		                            		  .mapRestaurantToRestaurantDto(restaurant)).collect(Collectors.toList());
-		
-		return restaurantDtoList;
+		 List<Restaurant> restaurants = restaurantRpo.findAll();
+	        List<RestaurantDto> restaurantDTOList = restaurants.stream().map(restaurant -> RestaurantMapper.INSTANCE.mapRestaurantToRestaurantDto(restaurant)).collect(Collectors.toList());
+	        return restaurantDTOList;
+//		List<Restaurant> restaurants = restaurantRpo.findAll();
+//		
+//		// map it to the list of Dtos 
+//		
+//		List<RestaurantDto> restaurantDtoList = restaurants.stream().map(restaurant -> RestaurantMapper.INSTANCE
+//		                            		  .mapRestaurantToRestaurantDto(restaurant)).collect(Collectors.toList());
+//		
+//		return restaurantDtoList;
 	}
 
 	public RestaurantDto addRestaurantInDB(RestaurantDto restaurantDto) {
 		
-		Restaurant savedRestaurant =  restaurantRpo.save(RestaurantMapper.INSTANCE.mapRestaurantDtoToRestaurant(restaurantDto));
+		Restaurant savedRestaurant =  restaurantRpo.save(RestaurantMapper.INSTANCE
+				.mapRestaurantDtoToRestaurant(restaurantDto));
         return RestaurantMapper.INSTANCE.mapRestaurantToRestaurantDto(savedRestaurant);
 		
 //		Restaurant restaurantDtoToRestaurant = RestaurantMapper.INSTANCE.mapRestaurantDtoToRestaurant(restaurantDto);

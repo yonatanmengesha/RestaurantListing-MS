@@ -1,4 +1,4 @@
-package mapper;
+package com.jotech.restaurantlisting.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
